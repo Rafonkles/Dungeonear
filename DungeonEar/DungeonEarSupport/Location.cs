@@ -13,7 +13,7 @@ namespace DungeonEar {
 
         public string  Description { get; set; }
 
-       [JsonIgnore]
+       
         public Dictionary<Direction, int>  Exits { get; set; }
 
 
