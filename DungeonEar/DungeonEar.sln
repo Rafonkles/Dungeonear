@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DungeonEar", "DungeonEar\DungeonEar.csproj", "{C984307C-0B1C-4400-A368-84E1445CC110}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DungeonEar", "DungeonEar\DungeonEar.csproj", "{C984307C-0B1C-4400-A368-84E1445CC110}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DungeonEarSupport", "DungeonEarSupport\DungeonEarSupport.csproj", "{BB0A678B-4557-4BC8-B39D-E5FA20FB58B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DungeonEarSupport", "DungeonEarSupport\DungeonEarSupport.csproj", "{BB0A678B-4557-4BC8-B39D-E5FA20FB58B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DungeonEar.test", "DungeonEar.test\DungeonEar.test.csproj", "{7DB2886A-2E61-4078-A400-220B065DD639}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DungeonEar.test", "DungeonEar.test\DungeonEar.test.csproj", "{7DB2886A-2E61-4078-A400-220B065DD639}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DungeonEarAPI", "DungeonEarAPI\DungeonEarAPI.csproj", "{D3DF0103-93DF-42FD-B065-F44E5D5A54DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{7DB2886A-2E61-4078-A400-220B065DD639}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DB2886A-2E61-4078-A400-220B065DD639}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DB2886A-2E61-4078-A400-220B065DD639}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3DF0103-93DF-42FD-B065-F44E5D5A54DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3DF0103-93DF-42FD-B065-F44E5D5A54DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3DF0103-93DF-42FD-B065-F44E5D5A54DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3DF0103-93DF-42FD-B065-F44E5D5A54DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

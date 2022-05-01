@@ -1,10 +1,9 @@
 ﻿namespace DungeonEar {
-    public class LocationProvider {
+    public class LocationProviderHardCoded : LocationProviderBase {
 
 
-        private Dictionary<int, Location> locations = new Dictionary<int, Location>();
 
-        public void LoadLocations() {
+        public override Task LoadLocations() {
             var l = CreateLocation(0, "The Cave", "Cave Description");
             l.Exits.Add(Direction.North, 1);
             locations.Add(0,l );
@@ -66,7 +65,7 @@
             l.Exits.Add(Direction.West, 8);
             locations.Add(9, l);
 
-
+            return Task.CompletedTask;
 
         }
 
@@ -80,10 +79,7 @@
         }
 
 
-        public Location GetLocationWithId (int id) {
-            return locations[id];
-        }
-
+       
 
     }
 }

@@ -7,20 +7,25 @@ using System.Threading.Tasks;
 namespace DungeonEar {
     public class MainGameEngine {
 
-        public LocationProvider world { get; set; }
+        public LocationProviderBase World { get; set; }
 
         public int CurrentLocationId { get; set; }
 
-        public MainGameEngine(LocationProvider lp) {
+        public MainGameEngine(LocationProviderBase lp) {
 
-            world = lp;
+            World = lp;
             CurrentLocationId = 0;
-            world.LoadLocations();
+            World.LoadLocations();
 
+        }
+
+        public async Task Initialise(InitialisationOptions opts) {
+            await World.Initialise(opts);
+            await World.LoadLocations();
         }
     
         public Location GetCurrentLocation() {
-            return world.GetLocationWithId(CurrentLocationId);
+            return World.GetLocationWithId(CurrentLocationId);
         }
 
 

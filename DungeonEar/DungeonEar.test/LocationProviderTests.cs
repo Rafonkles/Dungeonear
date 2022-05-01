@@ -5,7 +5,7 @@ namespace DungeonEar.test {
         [Fact]
         public void GetLocation0DoesNotReturnNull() {
 
-            var world = new LocationProvider();
+            var world = new LocationProviderHardCoded();
             world.LoadLocations();
             var location = world.GetLocationWithId(0);
             Assert.NotNull(location);
@@ -16,7 +16,7 @@ namespace DungeonEar.test {
         public void Location0HasValidDescription() {
 
            
-           var world = new LocationProvider();
+           var world = new LocationProviderHardCoded();
             world.LoadLocations();
             var location = world.GetLocationWithId(0);
             Assert.NotNull(location.Description);
@@ -30,7 +30,7 @@ namespace DungeonEar.test {
         [Fact]
         public void Location0IsNotTheSameAsLocation1() {
 
-            var world = new LocationProvider();
+            var world = new LocationProviderHardCoded();
             world.LoadLocations();
             var location0 = world.GetLocationWithId(0);
             var location1 = world.GetLocationWithId(1);
@@ -41,7 +41,7 @@ namespace DungeonEar.test {
 
         [Fact]
         public void HardCodedLocationContainsDavid() {
-            var world = new LocationProvider();
+            var world = new LocationProviderHardCoded();
             world.LoadLocations();
             var loc = world.GetLocationWithId(1);
             Assert.True(loc.Name.Contains("room"));

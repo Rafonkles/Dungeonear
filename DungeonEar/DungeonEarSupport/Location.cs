@@ -21,13 +21,17 @@ namespace DungeonEar {
 
         public int Id { get; set; }
 
-        public Location(int newID) {
+        public Location() {
+            Exits = new Dictionary<Direction, int>();
+
+        }
+        public Location(int newId) {
 
             Exits = new Dictionary<Direction, int>();
 
            
 
-            Id = newID;
+            this.Id = newId;
 
         }
 

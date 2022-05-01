@@ -1,4 +1,5 @@
 ﻿@page "/"
+@inject MainGameEngine game
 
 <PageTitle>Index</PageTitle>
 
@@ -6,3 +7,13 @@
 
 Welcome player 1 to the complicated world of DungeonEar. Click play to delve into the dungeons bellow.
 
+
+@code {
+
+    protected override async Task OnInitializedAsync() {
+        await game.Initialise(new InitialisationOptions()) ;
+
+    }
+
+
+}
