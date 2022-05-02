@@ -13,6 +13,7 @@ namespace DungeonEarAPI.Database {
 
         public DbSet<DbExits> Exits { get; set; }
 
+        public DbSet<DbLoginDetail> LoginDetails { get; set; }
 
 
     }

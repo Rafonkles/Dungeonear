@@ -5,10 +5,156 @@
 
 <h1>DungeonEar</h1>
 
-Welcome player 1 to the complicated world of DungeonEar. Click play to delve into the dungeons bellow.
+Welcome player 1 to the complicated world of DungeonEar. Click play to delve into the dungeons below.
+
+
+<div class = "alert-warning" hidden = "@HideError">
+    @ErrorMessage
+</div>
+
+<table>
+  <tr>
+    <td>Login</td>
+    <td>Register</td>
+    
+  </tr>
+  <tr>
+<td>Username:<input type = "text" /><br />Password: <input type = "password" /></td> 
+<td>New Username:<input type = "text" @bind = "NewUsername" /> Or  <br />New Password: <input type = "password" @bind = "NewPassword"/><br />Confrim New Password: <input type = "password" @bind = "ConfirmNewPassword"/></td>
+  </tr>
+
+</table>
+
+ <button @onclick = "()=>Login()">Login</button> 
+ <button @onclick = "()=>Register()">Register</button> 
+  <button @onclick = "()=>Generate()">Generate Name</button> 
+
+
+
+
 
 
 @code {
+
+    public string Username  { get; set; }
+    public string Password  { get; set; }
+    public string NewUsername  { get; set; }
+    public string NewPassword  { get; set; }
+    public string ConfirmNewPassword  { get; set; }
+    public bool HideError { get; set; } = true;
+    public string ErrorMessage { get; set; }
+
+
+    private async Task Login() {
+        var f = new LoginProviderFromAPI();
+        await f.RegisterNewUser();
+    }
+
+
+    private void Register() {
+
+        if(NewPassword != ConfirmNewPassword) {
+            ErrorMessage = "Confirm password must be the same as password";
+            HideError = false;
+            return;
+        }
+
+        if (ValidateUsername(NewUsername)&&ValidatePassword(NewPassword)) {
+            HideError = true;
+        }
+        else {
+            HideError = false;
+        }
+    }
+
+    private bool ValidateUsername(string theUsername) {
+
+        if (string.IsNullOrWhiteSpace(theUsername)) {
+            ErrorMessage = "Username field must not be empty.";
+            return false;
+        }
+
+        foreach(var lettersInUserName in theUsername) {
+            if (IsCharAllowed(lettersInUserName)==false) {
+                ErrorMessage = "Invalid character in username";
+                return false;
+            }
+        }
+
+
+        return true;
+
+
+
+    }
+
+    private bool ValidatePassword(string thePassword) {
+
+
+        
+
+        if (string.IsNullOrWhiteSpace(thePassword)) {
+            ErrorMessage = "Password field must not be empty.";
+            return false;
+        }
+
+
+        if (thePassword.Length < 8) {
+            ErrorMessage = "Password must contain at least 8 characters.";
+            return false;
+        }
+
+         if (thePassword.Length > 100) {
+           ErrorMessage = "Passwords must not be longer than 100 characters.";
+             return false;
+        }
+
+        
+
+
+        foreach(var lettersInPassword in thePassword) {
+            if (IsCharAllowed(lettersInPassword)==false) {
+                ErrorMessage = "Invalid character in password.";
+                return false;
+            }
+        }
+
+        return true;
+
+    }
+
+
+
+    private void Generate() {
+        NewUsername = GetRandomName();
+    }
+
+    private string GetRandomName() {
+
+        var ListOne = new string []  {"Slippy","Awful","Brave","Cautious","Clean","Cloudy","Delightful","Distinct","Eager","Envious","Faithful","Frail","Gifted","Healthy","Hilarious","Jolly"};
+        var ListTwo = new string []  {"Carrot","Apple","Animal","Hamburger","Horse","Juice","Kangaroo","Rose","Shampoo","River","Rain","Train","Lizard","Vegetable","Wall","Whale"};
+        Random r = new Random();
+        var index1 = r.Next(ListOne.Length - 1);
+        var index2 = r.Next(ListTwo.Length - 1);
+
+        return ListOne[index1] + ListTwo[index2];
+    }
+
+    private bool IsCharAllowed(char thecharacter) {
+
+        var allowedLetters = new char[] {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+        foreach(var allowedletter in allowedLetters) {
+            if(thecharacter == allowedletter) {
+                return true;
+            }
+        }
+        return false;
+    }
+        
+
+    
+
+
 
     protected override async Task OnInitializedAsync() {
         await game.Initialise(new InitialisationOptions()) ;

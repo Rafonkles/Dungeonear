@@ -3,6 +3,7 @@ using DungeonEarAPI.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DungeonEarAPI.Migrations
 {
     [DbContext(typeof(DungeonEarDatabaseContext))]
-    partial class DungeonEarDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220501154116_AddingUsernames")]
+    partial class AddingUsernames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
