@@ -1,5 +1,7 @@
 ﻿@page "/"
 @inject MainGameEngine game
+@inject NavigationManager NavManager
+
 
 <PageTitle>Index</PageTitle>
 
@@ -19,15 +21,25 @@ Welcome player 1 to the complicated world of DungeonEar. Click play to delve int
     
   </tr>
   <tr>
-<td>Username:<input type = "text" /><br />Password: <input type = "password" /></td> 
-<td>New Username:<input type = "text" @bind = "NewUsername" /> Or  <br />New Password: <input type = "password" @bind = "NewPassword"/><br />Confrim New Password: <input type = "password" @bind = "ConfirmNewPassword"/></td>
+<td>Username:<input type = "text" @bind = "Username" /><br />Password: <input type = "password" @bind = "Password" />
+    <br/>
+    <button @onclick = "()=>Login()">Login</button> 
+</td> 
+<td>
+    <br/>
+   
+    New Username:<input type = "text" @bind = "NewUsername" /> Or   <button @onclick = "()=>Generate()">Generate Name</button> 
+ <br />
+    New Password: <input type = "password" @bind = "NewPassword"/><br />
+    Confrim New Password: <input type = "password" @bind = "ConfirmNewPassword"/>
+    <br/>
+     <button @onclick = "()=>Register()">Register</button> 
+
+</td>
   </tr>
 
 </table>
 
- <button @onclick = "()=>Login()">Login</button> 
- <button @onclick = "()=>Register()">Register</button> 
-  <button @onclick = "()=>Generate()">Generate Name</button> 
 
 
 
@@ -43,15 +55,22 @@ Welcome player 1 to the complicated world of DungeonEar. Click play to delve int
     public string ConfirmNewPassword  { get; set; }
     public bool HideError { get; set; } = true;
     public string ErrorMessage { get; set; }
-
+    private LoginProviderFromAPI TheApi { get; set; }
 
     private async Task Login() {
-        var f = new LoginProviderFromAPI();
-        await f.RegisterNewUser();
+
+        var loggedin = await TheApi.Login(Username,Password);
+        if(loggedin) {
+            NavManager.NavigateTo("/counter");
+        }
+        else {
+             ErrorMessage = "Failed to login";
+            HideError = false;
+        }
     }
 
 
-    private void Register() {
+    private async Task Register() {
 
         if(NewPassword != ConfirmNewPassword) {
             ErrorMessage = "Confirm password must be the same as password";
@@ -61,6 +80,7 @@ Welcome player 1 to the complicated world of DungeonEar. Click play to delve int
 
         if (ValidateUsername(NewUsername)&&ValidatePassword(NewPassword)) {
             HideError = true;
+        await TheApi.RegisterNewUser(NewUsername,NewPassword);
         }
         else {
             HideError = false;
@@ -157,7 +177,10 @@ Welcome player 1 to the complicated world of DungeonEar. Click play to delve int
 
 
     protected override async Task OnInitializedAsync() {
+         TheApi = new LoginProviderFromAPI();
         await game.Initialise(new InitialisationOptions()) ;
+                   
+
 
     }
 

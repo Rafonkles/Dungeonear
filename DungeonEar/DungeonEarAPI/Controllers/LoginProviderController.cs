@@ -19,6 +19,7 @@ namespace DungeonEarAPI.Controllers {
         public UserLogin Get(string username, string password) {
             var dbm = TheDatabase.LoginDetails.FirstOrDefault(login => login.Username == username && login.Password == password);
             if (dbm == null) {
+                Response.StatusCode = 401;
                 return null;
             }
             var result = new UserLogin();
@@ -31,11 +32,11 @@ namespace DungeonEarAPI.Controllers {
 
 
         [HttpPut]
-        public void Put(string username, string password) {
+        public void Put(UserLogin userDetails) {
 
             TheDatabase.LoginDetails.Add(new DbLoginDetail() {
-                Username = username,
-                Password = password
+                Username = userDetails.Username,
+                Password = userDetails.Password
 
             });
             TheDatabase.SaveChanges();
